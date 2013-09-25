@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using log4net;
 
 namespace SHAgent
@@ -22,6 +23,9 @@ namespace SHAgent
             _logger.Debug("Executing command");
 
             ValidateCredentials(action);
+
+            if (!File.Exists(action.Command))
+                throw new ArgumentException("Command: " + action.Command + " was not found.");
 
             if (action.TheAction.Equals("START", StringComparison.InvariantCultureIgnoreCase))
                 Start(action);

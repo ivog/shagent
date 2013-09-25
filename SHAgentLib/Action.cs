@@ -35,9 +35,6 @@ namespace SHAgent
                 Command = configurationManager.UseRemoteCommand && parameters.Length == 4 ? parameters[3] : configurationManager.Command
             };
 
-            if(!File.Exists(theAction.Command))
-                throw new ArgumentException("Command: " + theAction.Command + " was not found.");
-
             return theAction;
         }
     }
