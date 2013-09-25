@@ -26,7 +26,7 @@ namespace SHAgent
 
             ValidateCredentials(action);
 
-            if (_fileSystem.FileExists(action.Command))
+            if (!_fileSystem.FileExists(action.Command))
                 throw new ArgumentException("Command: " + action.Command + " was not found.");
 
             if (action.TheAction.Equals("START", StringComparison.InvariantCultureIgnoreCase))
