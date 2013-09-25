@@ -20,12 +20,11 @@ namespace SHAgent
         {
             _logger.Debug(string.Format("Starting process:{0}", _configurationManager.Command));
 
-            ProcessStartInfo startInfo = new ProcessStartInfo
+            var startInfo = new ProcessStartInfo
             {
                 FileName = action.Command,
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
-                //CreateNoWindow = true
             };
 
             _process = new Process();
@@ -55,7 +54,11 @@ namespace SHAgent
                 processOutput.AppendLine(line);
             }
 
-            return processOutput.ToString();
+            string output = processOutput.ToString();
+
+            processOutput = new StringBuilder();
+
+            return output;
         }
     }
 }
