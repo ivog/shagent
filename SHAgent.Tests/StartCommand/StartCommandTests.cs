@@ -3,7 +3,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 
-namespace SHAgent.Tests
+namespace SHAgent.Tests.StartCommand
 {
     [TestClass]
     public class GivenStartCommandWithCorrectParametersAndNoProcessRunning
@@ -17,7 +17,7 @@ namespace SHAgent.Tests
             shConfigManager.ExpectedUserName.Returns("username");
             shConfigManager.ExpectedPassword.Returns("password");
 
-            CommandHandler commandHandler = new CommandHandler(processManager, shConfigManager, Substitute.For<IMessenger>());
+            var commandHandler = new CommandHandler(processManager, shConfigManager, Substitute.For<IMessenger>());
 
             commandHandler.ExecuteCommand(Action.Parse("START;username;password", shConfigManager));
 
@@ -39,7 +39,7 @@ namespace SHAgent.Tests
             shConfigManager.ExpectedUserName.Returns("username");
             shConfigManager.ExpectedPassword.Returns("password");
 
-            CommandHandler commandHandler = new CommandHandler(processManager, shConfigManager, Substitute.For<IMessenger>());
+            var commandHandler = new CommandHandler(processManager, shConfigManager, Substitute.For<IMessenger>());
 
             try
             {

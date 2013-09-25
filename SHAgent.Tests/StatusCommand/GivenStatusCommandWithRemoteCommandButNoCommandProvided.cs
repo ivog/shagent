@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 
-namespace SHAgent.Tests
+namespace SHAgent.Tests.StatusCommand
 {
     [TestClass]
     public class GivenStatusCommandWithRemoteCommandButNoCommandProvided
@@ -20,7 +20,7 @@ namespace SHAgent.Tests
 
             processManager.GetProcessOutput().Returns("ready!");
 
-            CommandHandler commandHandler = new CommandHandler(processManager, shConfigManager, messenger);
+            var commandHandler = new CommandHandler(processManager, shConfigManager, messenger);
 
             Action action = Action.Parse("STATUS;username;password", shConfigManager);
             commandHandler.ExecuteCommand(action);

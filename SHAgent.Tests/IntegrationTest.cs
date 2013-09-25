@@ -44,7 +44,7 @@ namespace SHAgent.Tests
             _serverProcess.Kill();
         }
 
-        public void StartSlowComandLineApp()
+        private void StartSlowComandLineApp()
         {
             const string server = "127.0.0.1";
             int port = int.Parse(ConfigurationManager.AppSettings["Port"]);
@@ -54,7 +54,7 @@ namespace SHAgent.Tests
             
             try
             {
-                using (TcpClient tcpClient = new TcpClient())
+                using (var tcpClient = new TcpClient())
                 {
                     const int maxBuffer = 100;
 
@@ -69,7 +69,7 @@ namespace SHAgent.Tests
                     networkStream.Write(sendBuffer, 0, sendBuffer.Length);
 
                     _logger.Debug("Receive acknowledgement from server..");
-                    byte[] receiveBuffer = new byte[maxBuffer];
+                    var receiveBuffer = new byte[maxBuffer];
                     int k = networkStream.Read(receiveBuffer, 0, maxBuffer);
  
                     for (int i = 0; i < k; i++)
@@ -88,8 +88,7 @@ namespace SHAgent.Tests
 
             _logger.Debug("Starting server from:" + app);
 
-            var processStartInfo = new ProcessStartInfo();
-            processStartInfo.FileName = app;
+            var processStartInfo = new ProcessStartInfo {FileName = app};
             //processStartInfo.UseShellExecute = false;
             //processStartInfo.RedirectStandardOutput = false;
             

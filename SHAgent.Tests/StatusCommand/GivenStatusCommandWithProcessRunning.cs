@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 
-namespace SHAgent.Tests
+namespace SHAgent.Tests.StatusCommand
 {
     [TestClass]
     public class GivenStatusCommandWithProcessRunning
@@ -19,7 +19,7 @@ namespace SHAgent.Tests
 
             var messenger = Substitute.For<IMessenger>();
             
-            CommandHandler commandHandler = new CommandHandler(processManager, shConfigManager, messenger);
+            var commandHandler = new CommandHandler(processManager, shConfigManager, messenger);
 
             commandHandler.ExecuteCommand(Action.Parse("STATUS;username;password", shConfigManager));
 
