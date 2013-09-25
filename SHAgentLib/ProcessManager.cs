@@ -18,7 +18,7 @@ namespace SHAgent
 
         public void StartProcess(Action action)
         {
-            _logger.Debug(string.Format("Starting process:{0}", _configurationManager.Command));
+            _logger.Debug(string.Format("Starting process:{0}", action.Command));
 
             var startInfo = new ProcessStartInfo
             {
