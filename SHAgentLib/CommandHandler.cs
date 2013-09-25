@@ -9,13 +9,15 @@ namespace SHAgent
         private readonly IProcessManager _processManager;
         private readonly IConfigurationManager _shConfigManager;
         private readonly IMessenger _messenger;
-        private ILog _logger = LogManager.GetLogger(typeof (CommandHandler));
+        private readonly IFileSystem _fileSystem;
+        private readonly ILog _logger = LogManager.GetLogger(typeof (CommandHandler));
 
-        public CommandHandler(IProcessManager processManager, IConfigurationManager shConfigManager, IMessenger messenger)
+        public CommandHandler(IProcessManager processManager, IConfigurationManager shConfigManager, IMessenger messenger, IFileSystem fileSystem)
         {
             _processManager = processManager;
             _shConfigManager = shConfigManager;
             _messenger = messenger;
+            _fileSystem = fileSystem;
         }
 
         public void ExecuteCommand(Action action)
@@ -24,7 +26,7 @@ namespace SHAgent
 
             ValidateCredentials(action);
 
-            if (!File.Exists(action.Command))
+            if (_fileSystem.FileExists(action.Command))
                 throw new ArgumentException("Command: " + action.Command + " was not found.");
 
             if (action.TheAction.Equals("START", StringComparison.InvariantCultureIgnoreCase))

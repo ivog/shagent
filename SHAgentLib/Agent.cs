@@ -84,7 +84,8 @@ namespace SHAgent
                     var commandHandler = new CommandHandler(
                         _processManager,
                         _configurationManager,
-                        new Messenger(sw));
+                        new Messenger(sw),
+                        new FileSystemAdapter());
 
                     commandHandler.ExecuteCommand(action);
 

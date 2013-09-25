@@ -44,7 +44,9 @@
     <Compile Include="Agent.cs" />
     <Compile Include="Action.cs" />
     <Compile Include="CommandHandler.cs" />
+    <Compile Include="FileSystemAdapter.cs" />
     <Compile Include="IConfigurationManager.cs" />
+    <Compile Include="IFileSystem.cs" />
     <Compile Include="IMessenger.cs" />
     <Compile Include="IProcessManager.cs" />
     <Compile Include="Messenger.cs" />

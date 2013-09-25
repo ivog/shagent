@@ -17,7 +17,10 @@ namespace SHAgent.Tests.StartCommand
             shConfigManager.ExpectedUserName.Returns("username");
             shConfigManager.ExpectedPassword.Returns("password");
 
-            var commandHandler = new CommandHandler(processManager, shConfigManager, Substitute.For<IMessenger>());
+            var fileSystem = Substitute.For<IFileSystem>();
+            fileSystem.FileExists(Arg.Any<string>()).Returns(true);
+
+            var commandHandler = new CommandHandler(processManager, shConfigManager, Substitute.For<IMessenger>(), fileSystem);
 
             commandHandler.ExecuteCommand(Action.Parse("START;username;password", shConfigManager));
 
@@ -39,7 +42,10 @@ namespace SHAgent.Tests.StartCommand
             shConfigManager.ExpectedUserName.Returns("username");
             shConfigManager.ExpectedPassword.Returns("password");
 
-            var commandHandler = new CommandHandler(processManager, shConfigManager, Substitute.For<IMessenger>());
+            var fileSystem = Substitute.For<IFileSystem>();
+            fileSystem.FileExists(Arg.Any<string>()).Returns(true);
+
+            var commandHandler = new CommandHandler(processManager, shConfigManager, Substitute.For<IMessenger>(), fileSystem);
 
             try
             {

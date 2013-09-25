@@ -20,7 +20,10 @@ namespace SHAgent.Tests.StatusCommand
 
             processManager.GetProcessOutput().Returns("ready!");
 
-            var commandHandler = new CommandHandler(processManager, shConfigManager, messenger);
+            var fileSystem = Substitute.For<IFileSystem>();
+            fileSystem.FileExists(Arg.Any<string>()).Returns(true);
+
+            var commandHandler = new CommandHandler(processManager, shConfigManager, messenger, fileSystem);
 
             Action action = Action.Parse("STATUS;username;password", shConfigManager);
             commandHandler.ExecuteCommand(action);

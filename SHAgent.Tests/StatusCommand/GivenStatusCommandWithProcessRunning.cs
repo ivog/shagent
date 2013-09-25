@@ -18,8 +18,11 @@ namespace SHAgent.Tests.StatusCommand
             shConfigManager.ExpectedPassword.Returns("password");
 
             var messenger = Substitute.For<IMessenger>();
-            
-            var commandHandler = new CommandHandler(processManager, shConfigManager, messenger);
+
+            var fileSystem = Substitute.For<IFileSystem>();
+            fileSystem.FileExists(Arg.Any<string>()).Returns(true);
+
+            var commandHandler = new CommandHandler(processManager, shConfigManager, messenger, fileSystem);
 
             commandHandler.ExecuteCommand(Action.Parse("STATUS;username;password", shConfigManager));
 
